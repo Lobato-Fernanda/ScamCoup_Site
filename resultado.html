@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Resultado da verificação da mensagem - ScamCoup</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+
+{# nivel vem do app.py: Baixo, Moderado, Alto ou Crítico #}
+{% set faixa = nivel|lower|replace('í', 'i') %}
+
+
+<body>
+
+    <header class="topbar">
+
+        <div class="container topbar-content">
+
+            <a href="/"
+               class="brand">
+
+                <div class="brand-icon">
+                    🛡️
+                </div>
+
+                <div>
+                    <strong>ScamCoup</strong>
+                    <span>Proteção contra golpes digitais</span>
+                </div>
+
+            </a>
+
+
+            <div class="page-actions">
+
+                <a href="/"
+                   class="secondary-nav-button">
+                    ← Voltar ao início
+                </a>
+
+                <a href="/historico"
+                   class="history-button">
+
+                    <span>🕘</span>
+                    Minhas verificações
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <section class="result-section">
+
+            <div class="container">
+
+                <p class="result-crumbs">
+                    <a href="/">Início</a> ›
+                    <a href="/analisar">Verificação de mensagem</a> ›
+                    Resultado
+                </p>
+
+
+                <!-- ================= VEREDITO ================= -->
+
+                <section class="result-hero is-{{ faixa }}">
+
+                    <div>
+
+                        <span class="result-badge">
+                            {% if faixa == 'baixo' %}✓{% else %}⚠️{% endif %}
+                            Risco {{ nivel }}
+                        </span>
+
+                        <h1>
+                            {% if faixa == 'critico' %}
+                                Esta mensagem reúne vários sinais de golpe.
+                            {% elif faixa == 'alto' %}
+                                Esta mensagem tem sinais fortes de golpe.
+                            {% elif faixa == 'moderado' %}
+                                Esta mensagem pede atenção antes de você responder.
+                            {% else %}
+                                Não encontramos sinais claros de golpe.
+                            {% endif %}
+                        </h1>
+
+                        <p class="result-lead">
+                            {% if faixa in ['alto', 'critico'] %}
+                                Não responda e não clique em nada. Se a mensagem diz
+                                ser de uma empresa, procure essa empresa pelo canal
+                                oficial que você já conhece.
+                            {% elif faixa == 'moderado' %}
+                                Não dá para afirmar que seja golpe, mas confirme
+                                quem enviou por um canal que você já conhece.
+                            {% else %}
+                                Foram encontrados poucos padrões suspeitos, mas isso
+                                não garante que a mensagem seja legítima.
+                            {% endif %}
+                        </p>
+
+                    </div>
+
+
+                    <div class="result-gauge">
+
+                        <div class="result-gauge-number">
+                            {{ score }}<span>/100</span>
+                        </div>
+
+                        <p class="result-gauge-label">
+                            Pontuação de risco
+                        </p>
+
+                        <div class="result-gauge-track"
+                             role="img"
+                             aria-label="Pontuação de risco: {{ score }} de 100">
+
+                            <span class="result-gauge-pin"
+                                  style="left: {{ [[score, 2]|max, 98]|min }}%"></span>
+
+                        </div>
+
+                        <div class="result-gauge-scale">
+                            <span>Baixo</span>
+                            <span>Alto</span>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= DETALHES ================= -->
+
+                <div class="analysis-layout">
+
+                    <div class="analysis-main-card">
+
+                        <div class="result-block">
+
+                            <h2>O que encontramos</h2>
+
+                            <p class="result-block-hint">
+                                Cada item abaixo é um padrão que costuma aparecer
+                                em mensagens de golpe.
+                            </p>
+
+                            {% if motivos and 'Nenhum' not in motivos[0] %}
+
+                                <ul class="result-findings">
+
+                                    {% for motivo in motivos %}
+                                    <li>
+                                        <b>⚠️</b>
+                                        <span>{{ motivo }}</span>
+                                    </li>
+                                    {% endfor %}
+
+                                </ul>
+
+                            {% else %}
+
+                                <div class="result-empty">
+
+                                    <span>✅</span>
+
+                                    <p>
+                                        <strong>Nenhum dos padrões cadastrados foi identificado.</strong>
+                                        Golpes novos aparecem o tempo todo, então
+                                        continue desconfiando de pedidos inesperados.
+                                    </p>
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        {% if categorias %}
+                        <div class="result-block">
+
+                            <h2>Tipo de golpe compatível</h2>
+
+                            <p class="result-block-hint">
+                                Categorias que combinam com o conteúdo da mensagem.
+                            </p>
+
+                            <ul class="result-tags">
+
+                                {% for categoria in categorias %}
+                                <li {% if categoria == 'Não identificado' %}class="is-neutral"{% endif %}>
+                                    {{ categoria }}
+                                </li>
+                                {% endfor %}
+
+                            </ul>
+
+                        </div>
+                        {% endif %}
+
+
+                        <div class="result-block">
+
+                            <h2>Mensagem analisada</h2>
+
+                            <p class="result-block-hint">
+                                Este é o texto exatamente como você enviou.
+                            </p>
+
+                            <p class="result-quote">{{ mensagem }}</p>
+
+                        </div>
+
+                    </div>
+
+
+                    <aside class="analysis-sidebar">
+
+                        <div class="sidebar-card attention-card">
+
+                            <div class="sidebar-icon orange-sidebar">
+                                ⚠️
+                            </div>
+
+                            <span class="sidebar-label">
+                                Antes de responder
+                            </span>
+
+                            <h3>
+                                O que não fazer com esta mensagem.
+                            </h3>
+
+                            <ul class="simple-check-list danger-list">
+
+                                <li>
+                                    <span>×</span>
+                                    Não envie senha nem código de verificação
+                                </li>
+
+                                <li>
+                                    <span>×</span>
+                                    Não faça PIX por pressão ou urgência
+                                </li>
+
+                                <li>
+                                    <span>×</span>
+                                    Não clique nos links antes de verificar
+                                </li>
+
+                                <li>
+                                    <span>×</span>
+                                    Não confie no número que aparece no remetente
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+
+                        <div class="sidebar-card">
+
+                            <div class="sidebar-icon blue-sidebar">
+                                🛡️
+                            </div>
+
+                            <span class="sidebar-label">
+                                Importante
+                            </span>
+
+                            <h3>
+                                Isto é uma orientação, não um veredito.
+                            </h3>
+
+                            <p>
+                                O ScamCoup procura padrões conhecidos no texto.
+                                Uma mensagem sem esses padrões ainda pode ser golpe,
+                                e uma mensagem com eles pode ser legítima.
+                            </p>
+
+                        </div>
+
+                    </aside>
+
+                </div>
+
+
+                <!-- ================= AÇÕES ================= -->
+
+                <div class="result-actions">
+
+                    <p>
+                        <strong>Recebeu mais alguma coisa suspeita?</strong>
+                        A verificação é rápida e você não precisa responder nada.
+                    </p>
+
+                    <a href="/analisar"
+                       class="primary-cta">
+
+                        Verificar outra mensagem
+                        <span class="submit-arrow">→</span>
+
+                    </a>
+
+                </div>
+
+
+                <p class="result-more">
+                    Também dá para verificar
+                    <a href="/link">um link</a>
+                    ou
+                    <a href="/qrcode">um QR Code</a>.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="modern-footer">
+
+        <div class="container footer-content">
+
+            <div>
+
+                <strong>
+                    🛡️ ScamCoup
+                </strong>
+
+                <p>
+                    Informação simples para decisões mais seguras.
+                </p>
+
+            </div>
+
+            <span>
+                Projeto acadêmico
+            </span>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

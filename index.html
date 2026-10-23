@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ScamCoup</title>
+
+    <!-- FONTES -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+
+<body>
+
+    <!-- =========================
+         TOPO
+    ========================== -->
+
+    <header class="topbar">
+
+        <div class="container topbar-content">
+
+            <a href="/"
+               class="brand">
+
+                <div class="brand-icon">
+                    🛡️
+                </div>
+
+                <div>
+                    <strong>ScamCoup</strong>
+                    <span>Proteção contra golpes digitais</span>
+                </div>
+
+            </a>
+
+
+            <a href="/historico"
+               class="history-button">
+
+                <span>🕘</span>
+                Minhas verificações
+
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+
+        <!-- =========================
+             HERO
+        ========================== -->
+
+        <section class="hero-accessible">
+
+            <div class="hero-glow hero-glow-one"></div>
+            <div class="hero-glow hero-glow-two"></div>
+
+
+            <div class="container hero-grid">
+
+
+                <div class="hero-copy">
+
+                    <div class="eyebrow">
+                        <span>●</span>
+                        Segurança simples para o dia a dia
+                    </div>
+
+
+                    <h1>
+                        Antes de clicar,
+                        <span>verifique.</span>
+                    </h1>
+
+
+                    <p class="hero-description">
+
+                        Recebeu uma mensagem, link ou QR Code
+                        e ficou em dúvida?
+
+                        O ScamCoup ajuda você a identificar
+                        possíveis sinais de golpe de forma
+                        simples e fácil de entender.
+
+                    </p>
+
+
+                    <a href="#verificar"
+                       class="primary-cta">
+
+                        Quero verificar agora
+
+                        <span>
+                            →
+                        </span>
+
+                    </a>
+
+
+                    <div class="trust-note">
+
+                        <span class="trust-icon">
+                            ✓
+                        </span>
+
+                        <p>
+                            Você não precisa entender de tecnologia.
+                            Nós explicamos o resultado em linguagem simples.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CARD DE ALERTA -->
+
+                <div class="hero-card">
+
+                    <div class="hero-card-icon">
+                        ⚠️
+                    </div>
+
+
+                    <span class="hero-card-label">
+                        Dica importante
+                    </span>
+
+
+                    <h2>
+                        Ficou com dúvida?
+                        Não tenha pressa.
+                    </h2>
+
+
+                    <p>
+                        Antes de clicar em um link,
+                        fazer um PIX ou informar seus dados,
+                        faça uma verificação.
+                    </p>
+
+
+                    <div class="hero-card-list">
+
+                        <div>
+                            <span>✕</span>
+                            Não clique imediatamente
+                        </div>
+
+                        <div>
+                            <span>✕</span>
+                            Não envie senhas
+                        </div>
+
+                        <div>
+                            <span>✕</span>
+                            Não faça pagamentos por pressão
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             O QUE VOCÊ RECEBEU
+        ========================== -->
+
+        <section class="verification-section"
+                 id="verificar">
+
+            <div class="container">
+
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        Vamos começar
+                    </span>
+
+                    <h2>
+                        O que você recebeu?
+                    </h2>
+
+                    <p>
+                        Escolha uma opção.
+                        Nós mostramos o próximo passo.
+                    </p>
+
+                </div>
+
+
+
+                <div class="verification-grid">
+
+
+                    <!-- MENSAGEM -->
+
+                    <a href="/analisar"
+                       class="verification-card">
+
+                        <div class="verification-icon blue-icon">
+                            💬
+                        </div>
+
+
+                        <div class="verification-content">
+
+                            <span class="card-number">
+                                OPÇÃO 1
+                            </span>
+
+                            <h3>
+                                Uma mensagem
+                            </h3>
+
+                            <p>
+                                WhatsApp, SMS ou e-mail que
+                                deixou você desconfiado.
+                            </p>
+
+                            <span class="card-action">
+                                Verificar mensagem
+                                <b>→</b>
+                            </span>
+
+                        </div>
+
+                    </a>
+
+
+
+                    <!-- LINK -->
+
+                    <a href="/link"
+                       class="verification-card">
+
+                        <div class="verification-icon purple-icon">
+                            🔗
+                        </div>
+
+
+                        <div class="verification-content">
+
+                            <span class="card-number">
+                                OPÇÃO 2
+                            </span>
+
+                            <h3>
+                                Um link
+                            </h3>
+
+                            <p>
+                                Um endereço de site recebido por
+                                mensagem, e-mail ou rede social.
+                            </p>
+
+                            <span class="card-action">
+                                Verificar link
+                                <b>→</b>
+                            </span>
+
+                        </div>
+
+                    </a>
+
+
+
+                    <!-- QR CODE -->
+
+                    <a href="/qrcode"
+                       class="verification-card">
+
+                        <div class="verification-icon green-icon">
+                            ▦
+                        </div>
+
+
+                        <div class="verification-content">
+
+                            <span class="card-number">
+                                OPÇÃO 3
+                            </span>
+
+                            <h3>
+                                Um QR Code
+                            </h3>
+
+                            <p>
+                                Uma imagem de QR Code que você
+                                recebeu ou encontrou.
+                            </p>
+
+                            <span class="card-action">
+                                Verificar QR Code
+                                <b>→</b>
+                            </span>
+
+                        </div>
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             COMO FUNCIONA
+        ========================== -->
+
+        <section class="how-section">
+
+            <div class="container">
+
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        Fácil de usar
+                    </span>
+
+                    <h2>
+                        Como funciona?
+                    </h2>
+
+                    <p>
+                        São apenas três passos.
+                    </p>
+
+                </div>
+
+
+
+                <div class="steps-grid">
+
+
+                    <div class="step-card">
+
+                        <div class="step-number">
+                            1
+                        </div>
+
+                        <div class="step-icon">
+                            👆
+                        </div>
+
+                        <h3>
+                            Escolha
+                        </h3>
+
+                        <p>
+                            Diga se recebeu uma mensagem,
+                            um link ou um QR Code.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="step-line"></div>
+
+
+
+                    <div class="step-card">
+
+                        <div class="step-number">
+                            2
+                        </div>
+
+                        <div class="step-icon">
+                            🔍
+                        </div>
+
+                        <h3>
+                            Verifique
+                        </h3>
+
+                        <p>
+                            Envie o conteúdo para o
+                            ScamCoup fazer a análise.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="step-line"></div>
+
+
+
+                    <div class="step-card">
+
+                        <div class="step-number">
+                            3
+                        </div>
+
+                        <div class="step-icon">
+                            🛡️
+                        </div>
+
+                        <h3>
+                            Entenda
+                        </h3>
+
+                        <p>
+                            Veja os sinais encontrados
+                            e saiba como agir.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             SEGURANÇA
+        ========================== -->
+
+        <section class="support-section">
+
+            <div class="container">
+
+
+                <div class="support-card">
+
+
+                    <div class="support-icon">
+                        ☎️
+                    </div>
+
+
+                    <div class="support-copy">
+
+                        <span>
+                            Na dúvida, confirme.
+                        </span>
+
+                        <h2>
+                            Não confie apenas na mensagem recebida.
+                        </h2>
+
+                        <p>
+                            Se alguém disser que representa um banco,
+                            empresa ou órgão público, procure o telefone
+                            ou site oficial e confirme diretamente.
+                        </p>
+
+                    </div>
+
+
+                    <div class="support-badge">
+
+                        <span>✓</span>
+
+                        Segurança também é
+                        saber parar e confirmar.
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="modern-footer">
+
+        <div class="container footer-content">
+
+            <div>
+
+                <strong>
+                    🛡️ ScamCoup
+                </strong>
+
+                <p>
+                    Informação simples para decisões mais seguras.
+                </p>
+
+            </div>
+
+
+            <span>
+                Projeto acadêmico
+            </span>
+
+        </div>
+
+    </footer>
+
+<!-- Widget do VLibras (Acessibilidade Auditiva) -->
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+  new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
+
+<!-- Leitor de Voz Nativo (Acessibilidade Visual) -->
+<script>
+  function falarTexto(texto) {
+    if ('speechSynthesis' in window) {
+      const fala = new SpeechSynthesisUtterance(texto);
+      fala.lang = 'pt-BR';
+      window.speechSynthesis.speak(fala);
+    }
+  }
+</script>
+</body>
+
+</html>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Resultado da verificação de QR Code - ScamCoup</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+
+{# nivel vem do app.py: Baixo, Moderado, Alto ou Crítico #}
+{% set faixa = nivel|lower|replace('í', 'i') %}
+
+{# tipo de conteúdo, deduzido do texto que o OpenCV leu #}
+{% set c = conteudo|lower %}
+{% if c.startswith('http') %}{% set tipo = 'url' %}
+{% elif 'br.gov.bcb.pix' in c or c.startswith('000201') %}{% set tipo = 'pix' %}
+{% elif c.startswith('wifi:') %}{% set tipo = 'wifi' %}
+{% elif c.startswith('begin:vcard') %}{% set tipo = 'contato' %}
+{% elif c.startswith('tel:') %}{% set tipo = 'telefone' %}
+{% elif c.startswith('mailto:') %}{% set tipo = 'email' %}
+{% else %}{% set tipo = 'texto' %}{% endif %}
+
+
+<body>
+
+    <header class="topbar">
+
+        <div class="container topbar-content">
+
+            <a href="/"
+               class="brand">
+
+                <div class="brand-icon">
+                    🛡️
+                </div>
+
+                <div>
+                    <strong>ScamCoup</strong>
+                    <span>Proteção contra golpes digitais</span>
+                </div>
+
+            </a>
+
+
+            <div class="page-actions">
+
+                <a href="/"
+                   class="secondary-nav-button">
+                    ← Voltar ao início
+                </a>
+
+                <a href="/historico"
+                   class="history-button">
+
+                    <span>🕘</span>
+                    Minhas verificações
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <section class="result-section">
+
+            <div class="container">
+
+                <p class="result-crumbs">
+                    <a href="/">Início</a> ›
+                    <a href="/qrcode">Verificação de QR Code</a> ›
+                    Resultado
+                </p>
+
+
+                <!-- ================= VEREDITO ================= -->
+
+                <section class="result-hero is-{{ faixa }}">
+
+                    <div>
+
+                        <span class="result-badge">
+                            {% if faixa == 'baixo' %}✓{% else %}⚠️{% endif %}
+                            Risco {{ nivel }}
+                        </span>
+
+                        <h1>
+                            {% if faixa == 'critico' %}
+                                Este QR Code reúne vários sinais de golpe.
+                            {% elif faixa == 'alto' %}
+                                Este QR Code tem sinais fortes de golpe.
+                            {% elif faixa == 'moderado' %}
+                                Este QR Code pede atenção antes de você usar.
+                            {% elif tipo != 'url' %}
+                                Este código não leva a um endereço na internet.
+                            {% else %}
+                                Não encontramos sinais claros de golpe.
+                            {% endif %}
+                        </h1>
+
+                        <p class="result-lead">
+                            {% if faixa in ['alto', 'critico'] %}
+                                Não abra o destino nem faça pagamentos a partir
+                                deste código. Confirme a cobrança pelo aplicativo
+                                oficial da empresa.
+                            {% elif faixa == 'moderado' %}
+                                Não dá para afirmar que seja golpe, mas confirme
+                                a origem do código antes de usar.
+                            {% elif tipo != 'url' %}
+                                Leia com atenção o conteúdo abaixo antes de usar.
+                                Um QR Code não pode ser conferido a olho nu.
+                            {% else %}
+                                Confira abaixo para onde o código leva e veja se
+                                é mesmo o que você esperava.
+                            {% endif %}
+                        </p>
+
+                    </div>
+
+
+                    <div class="result-gauge">
+
+                        <div class="result-gauge-number">
+                            {{ score }}<span>/100</span>
+                        </div>
+
+                        <p class="result-gauge-label">
+                            Pontuação de risco
+                        </p>
+
+                        <div class="result-gauge-track"
+                             role="img"
+                             aria-label="Pontuação de risco: {{ score }} de 100">
+
+                            <span class="result-gauge-pin"
+                                  style="left: {{ [[score, 2]|max, 98]|min }}%"></span>
+
+                        </div>
+
+                        <div class="result-gauge-scale">
+                            <span>Baixo</span>
+                            <span>Alto</span>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ================= DETALHES ================= -->
+
+                <div class="analysis-layout">
+
+                    <div class="analysis-main-card">
+
+                        <div class="result-block">
+
+                            <h2>O que este código contém</h2>
+
+                            <p class="result-block-hint">
+                                Um QR Code não pode ser lido a olho nu. Este é o
+                                conteúdo real dele.
+                            </p>
+
+                            <div class="result-field">
+
+                                <p class="result-field-name">
+                                    {% if tipo == 'url' %}Abre um endereço na internet
+                                    {% elif tipo == 'pix' %}Cobrança PIX
+                                    {% elif tipo == 'wifi' %}Conexão de rede Wi-Fi
+                                    {% elif tipo == 'contato' %}Cartão de contato
+                                    {% elif tipo == 'telefone' %}Número de telefone
+                                    {% elif tipo == 'email' %}Endereço de e-mail
+                                    {% else %}Texto
+                                    {% endif %}
+                                </p>
+
+                                <p class="result-field-value">
+                                    {{ conteudo }}
+                                </p>
+
+                            </div>
+
+
+                            {% if tipo == 'url' %}
+                            <div class="result-field">
+
+                                <p class="result-field-name">
+                                    Domínio de destino
+                                </p>
+
+                                <p class="result-field-value">
+                                    {{ dominio }}
+                                </p>
+
+                            </div>
+                            {% endif %}
+
+                        </div>
+
+
+                        <div class="result-block">
+
+                            <h2>O que encontramos</h2>
+
+                            <p class="result-block-hint">
+                                Cada item abaixo é um sinal que costuma aparecer
+                                em códigos usados em golpes.
+                            </p>
+
+                            {% if motivos and 'Nenhum' not in motivos[0] %}
+
+                                <ul class="result-findings">
+
+                                    {% for motivo in motivos %}
+                                    <li>
+                                        <b>⚠️</b>
+                                        <span>{{ motivo }}</span>
+                                    </li>
+                                    {% endfor %}
+
+                                </ul>
+
+                            {% else %}
+
+                                <div class="result-empty">
+
+                                    <span>✅</span>
+
+                                    <p>
+                                        <strong>Nenhum padrão suspeito no conteúdo do código.</strong>
+                                        Confira acima se o destino é mesmo o que
+                                        você esperava.
+                                    </p>
+
+                                </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+
+                    <aside class="analysis-sidebar">
+
+                        <div class="sidebar-card attention-card">
+
+                            <div class="sidebar-icon orange-sidebar">
+                                ⚠️
+                            </div>
+
+                            <span class="sidebar-label">
+                                Antes de continuar
+                            </span>
+
+                            <h3>
+                                O que conferir neste código.
+                            </h3>
+
+                            <ul class="simple-check-list danger-list">
+
+                                <li>
+                                    <span>×</span>
+                                    Não confirme PIX sem ler o nome de quem recebe
+                                </li>
+
+                                <li>
+                                    <span>×</span>
+                                    Não informe senha nem dados do cartão
+                                </li>
+
+                                <li>
+                                    <span>×</span>
+                                    Não instale aplicativos que o código mandar baixar
+                                </li>
+
+                                <li>
+                                    <span>×</span>
+                                    Em loja física, veja se não é adesivo colado por cima
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+
+                        <div class="sidebar-card">
+
+                            <div class="sidebar-icon blue-sidebar">
+                                🛡️
+                            </div>
+
+                            <span class="sidebar-label">
+                                Importante
+                            </span>
+
+                            <h3>
+                                Isto é uma orientação, não um veredito.
+                            </h3>
+
+                            <p>
+                                O ScamCoup lê o conteúdo do código e aponta sinais
+                                conhecidos. Ele não abre a página de destino nem
+                                confirma se uma cobrança é legítima.
+                            </p>
+
+                        </div>
+
+                    </aside>
+
+                </div>
+
+
+                <!-- ================= AÇÕES ================= -->
+
+                <div class="result-actions">
+
+                    <p>
+                        <strong>Apareceu outro código suspeito?</strong>
+                        A verificação é rápida e você não precisa apontar a câmera
+                        para ele.
+                    </p>
+
+                    <a href="/qrcode"
+                       class="primary-cta">
+
+                        Verificar outro QR Code
+                        <span class="submit-arrow">→</span>
+
+                    </a>
+
+                </div>
+
+
+                <p class="result-more">
+                    Também dá para verificar
+                    <a href="/link">um link</a>
+                    ou
+                    <a href="/analisar">o texto de uma mensagem</a>.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="modern-footer">
+
+        <div class="container footer-content">
+
+            <div>
+
+                <strong>
+                    🛡️ ScamCoup
+                </strong>
+
+                <p>
+                    Informação simples para decisões mais seguras.
+                </p>
+
+            </div>
+
+            <span>
+                Projeto acadêmico
+            </span>
+
+        </div>
+
+    </footer>
+<!-- Agora sim com as letrinhas coloridas! -->
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+  new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
+
+<script>
+  function falarTexto(texto) {
+    if ('speechSynthesis' in window) {
+      const fala = new SpeechSynthesisUtterance(texto);
+      fala.lang = 'pt-BR';
+      window.speechSynthesis.speak(fala);
+    }
+  }
+</script>
+</body>
+
+</html>

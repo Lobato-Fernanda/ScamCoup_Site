@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Verificar link - ScamCoup</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+
+<body>
+
+    <header class="topbar">
+
+        <div class="container topbar-content">
+
+            <a href="/"
+               class="brand">
+
+                <div class="brand-icon">
+                    🛡️
+                </div>
+
+                <div>
+                    <strong>ScamCoup</strong>
+                    <span>Proteção contra golpes digitais</span>
+                </div>
+
+            </a>
+
+
+            <div class="page-actions">
+
+                <a href="/"
+                   class="secondary-nav-button">
+                    ← Voltar ao início
+                </a>
+
+                <a href="/historico"
+                   class="history-button">
+
+                    <span>🕘</span>
+                    Minhas verificações
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <main>
+
+        <!-- HERO -->
+
+        <section class="analysis-hero">
+
+            <div class="analysis-glow analysis-glow-one"></div>
+            <div class="analysis-glow analysis-glow-two"></div>
+
+
+            <div class="container analysis-hero-content">
+
+                <div class="analysis-icon">
+                    🔗
+                </div>
+
+
+                <span class="analysis-tag">
+                    Verificação de link
+                </span>
+
+
+                <h1>
+                    Recebeu um link
+                    <span>estranho?</span>
+                </h1>
+
+
+                <p>
+                    Não clique nele ainda.
+                    Cole o endereço abaixo e o ScamCoup verificará
+                    alguns sinais que podem indicar risco.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- CONTEÚDO -->
+
+        <section class="analysis-section">
+
+            <div class="container analysis-layout">
+
+
+                <!-- FORMULÁRIO -->
+
+                <div class="analysis-main-card">
+
+                    <div class="form-step">
+
+                        <div class="form-step-number">
+                            1
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Primeiro passo
+                            </span>
+
+                            <h2>
+                                Cole o link que você recebeu
+                            </h2>
+
+                            <p>
+                                Você pode copiar o endereço de uma mensagem,
+                                SMS, e-mail ou rede social.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <form method="POST"
+                          class="modern-analysis-form">
+
+
+                        <label for="url"
+                               class="modern-label">
+
+                            Link recebido
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="url"
+                            name="url"
+                            class="modern-input"
+                            placeholder="Exemplo: https://exemplo.com.br"
+                            required>
+
+
+                        <div class="textarea-footer">
+
+                            <div class="help-text">
+
+                                <span>💡</span>
+
+                                <p>
+                                    Não é necessário abrir o link.
+                                    Apenas copie e cole o endereço aqui.
+                                </p>
+
+                            </div>
+
+
+                            <span class="privacy-inline">
+                                🔒 Verificação sem abrir o site
+                            </span>
+
+                        </div>
+
+
+                        <button type="submit"
+                                class="modern-submit">
+
+                            <span class="submit-icon">
+                                🔍
+                            </span>
+
+
+                            <span class="submit-copy">
+
+                                <strong>
+                                    Verificar este link
+                                </strong>
+
+                                <small>
+                                    Vamos procurar possíveis sinais de risco
+                                </small>
+
+                            </span>
+
+
+                            <span class="submit-arrow">
+                                →
+                            </span>
+
+                        </button>
+
+
+                    </form>
+
+                </div>
+
+
+
+                <!-- COLUNA DE AJUDA -->
+
+                <aside class="analysis-sidebar">
+
+
+                    <div class="sidebar-card attention-card">
+
+                        <div class="sidebar-icon orange-sidebar">
+                            ⚠️
+                        </div>
+
+
+                        <span class="sidebar-label">
+                            Antes de acessar
+                        </span>
+
+
+                        <h3>
+                            Não abra o link por curiosidade.
+                        </h3>
+
+
+                        <p>
+                            Links falsos podem imitar páginas conhecidas
+                            para tentar roubar informações.
+                        </p>
+
+
+                        <ul class="simple-check-list danger-list">
+
+                            <li>
+                                <span>×</span>
+                                Não informe sua senha
+                            </li>
+
+                            <li>
+                                <span>×</span>
+                                Não informe dados bancários
+                            </li>
+
+                            <li>
+                                <span>×</span>
+                                Não faça pagamentos por pressão
+                            </li>
+
+                            <li>
+                                <span>×</span>
+                                Não instale arquivos desconhecidos
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+
+                    <div class="sidebar-card help-card">
+
+                        <div class="sidebar-icon blue-sidebar">
+                            ?
+                        </div>
+
+
+                        <span class="sidebar-label blue-label">
+                            Precisa de ajuda?
+                        </span>
+
+
+                        <h3>
+                            Como copiar um link?
+                        </h3>
+
+
+                        <div class="copy-steps">
+
+                            <div>
+
+                                <span>1</span>
+
+                                <p>
+                                    Pressione o link por alguns segundos.
+                                </p>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>2</span>
+
+                                <p>
+                                    Escolha a opção
+                                    <strong>Copiar link</strong>
+                                    ou
+                                    <strong>Copiar endereço</strong>.
+                                </p>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>3</span>
+
+                                <p>
+                                    Volte ao ScamCoup,
+                                    pressione o campo e toque em
+                                    <strong>Colar</strong>.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </aside>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- EDUCATIVO -->
+
+        <section class="analysis-info-section">
+
+            <div class="container">
+
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        O que observamos
+                    </span>
+
+
+                    <h2>
+                        Alguns sinais encontrados em links suspeitos
+                    </h2>
+
+
+                    <p>
+                        O ScamCoup verifica características do endereço
+                        que podem ajudar a identificar possíveis riscos.
+                    </p>
+
+                </div>
+
+
+
+                <div class="risk-signs-grid">
+
+
+                    <div class="risk-sign-card">
+
+                        <div class="risk-sign-icon">
+                            🔒
+                        </div>
+
+                        <h3>
+                            Proteção do endereço
+                        </h3>
+
+                        <p>
+                            Verificamos características do endereço,
+                            incluindo o uso de HTTPS.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="risk-sign-card">
+
+                        <div class="risk-sign-icon">
+                            🌐
+                        </div>
+
+                        <h3>
+                            Nome do site
+                        </h3>
+
+                        <p>
+                            Endereços estranhos ou muito diferentes
+                            do nome oficial merecem atenção.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="risk-sign-card">
+
+                        <div class="risk-sign-icon">
+                            🔎
+                        </div>
+
+                        <h3>
+                            Estrutura do link
+                        </h3>
+
+                        <p>
+                            Links muito longos ou com elementos incomuns
+                            podem apresentar maior risco.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="risk-sign-card">
+
+                        <div class="risk-sign-icon">
+                            ⚠️
+                        </div>
+
+                        <h3>
+                            Palavras suspeitas
+                        </h3>
+
+                        <p>
+                            Alguns endereços utilizam termos relacionados
+                            a login, pagamento, prêmio ou confirmação.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <footer class="modern-footer">
+
+        <div class="container footer-content">
+
+            <div>
+
+                <strong>
+                    🛡️ ScamCoup
+                </strong>
+
+                <p>
+                    Informação simples para decisões mais seguras.
+                </p>
+
+            </div>
+
+            <span>
+                Projeto acadêmico
+            </span>
+
+        </div>
+
+    </footer>
+<!-- ... resto do seu código da página ... -->
+
+    <!-- Widget do VLibras (Acessibilidade Auditiva) -->
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+    <!-- Leitor de Voz Nativo (Acessibilidade Visual) -->
+    <script>
+      function falarTexto(texto) {
+        if ('speechSynthesis' in window) {
+          const fala = new SpeechSynthesisUtterance(texto);
+          fala.lang = 'pt-BR';
+          window.speechSynthesis.speak(fala);
+        }
+      }
+    </script>
+
+  </body>
+</html>
+</body>
+
+</html>

@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Verificar mensagem - ScamCoup</title>
+
+    <!-- FONTES -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+
+<body>
+
+    <!-- =====================================================
+         TOPO
+    ====================================================== -->
+
+    <header class="topbar">
+
+        <div class="container topbar-content">
+
+            <a href="/"
+               class="brand">
+
+                <div class="brand-icon">
+                    🛡️
+                </div>
+
+                <div>
+                    <strong>ScamCoup</strong>
+                    <span>Proteção contra golpes digitais</span>
+                </div>
+
+            </a>
+
+
+            <div class="page-actions">
+
+                <a href="/"
+                   class="secondary-nav-button">
+
+                    ← Voltar ao início
+
+                </a>
+
+
+                <a href="/historico"
+                   class="history-button">
+
+                    <span>🕘</span>
+
+                    Minhas verificações
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <main>
+
+        <!-- =====================================================
+             APRESENTAÇÃO
+        ====================================================== -->
+
+        <section class="analysis-hero">
+
+            <div class="analysis-glow analysis-glow-one"></div>
+
+            <div class="analysis-glow analysis-glow-two"></div>
+
+
+            <div class="container analysis-hero-content">
+
+                <div class="analysis-icon">
+                    💬
+                </div>
+
+
+                <span class="analysis-tag">
+                    Verificação de mensagem
+                </span>
+
+
+                <h1>
+                    Recebeu uma mensagem
+                    <span>suspeita?</span>
+                </h1>
+
+
+                <p>
+                    Cole a mensagem abaixo antes de responder,
+                    clicar em algum link ou realizar um pagamento.
+                    O ScamCoup ajuda você a identificar possíveis sinais de golpe.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             ÁREA PRINCIPAL
+        ====================================================== -->
+
+        <section class="analysis-section">
+
+            <div class="container analysis-layout">
+
+
+                <!-- =================================================
+                     FORMULÁRIO
+                ================================================== -->
+
+                <div class="analysis-main-card">
+
+
+                    <div class="form-step">
+
+                        <div class="form-step-number">
+                            1
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                Primeiro passo
+                            </span>
+
+
+                            <h2>
+                                Cole a mensagem que você recebeu
+                            </h2>
+
+
+                            <p>
+                                Pode ser uma mensagem do WhatsApp,
+                                SMS, e-mail ou rede social.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <form method="POST"
+                          class="modern-analysis-form">
+
+
+                        <label for="mensagem"
+                               class="modern-label">
+
+                            Mensagem recebida
+
+                        </label>
+
+
+                        <textarea
+                            id="mensagem"
+                            name="mensagem"
+                            class="modern-textarea"
+                            placeholder="Exemplo: Sua encomenda foi taxada. Para liberar a entrega, faça o pagamento através deste link..."
+                            required></textarea>
+
+
+
+                        <div class="textarea-footer">
+
+
+                            <div class="help-text">
+
+                                <span>
+                                    💡
+                                </span>
+
+                                <p>
+                                    Cole a mensagem inteira.
+                                    Isso ajuda a identificar mais sinais de risco.
+                                </p>
+
+                            </div>
+
+
+                            <span class="privacy-inline">
+                                🔒 Proteja seus dados pessoais
+                            </span>
+
+
+                        </div>
+
+
+
+                        <button type="submit"
+                                class="modern-submit">
+
+
+                            <span class="submit-icon">
+                                🛡️
+                            </span>
+
+
+                            <span class="submit-copy">
+
+                                <strong>
+                                    Verificar se pode ser golpe
+                                </strong>
+
+                                <small>
+                                    Vamos procurar possíveis sinais de fraude
+                                </small>
+
+                            </span>
+
+
+                            <span class="submit-arrow">
+                                →
+                            </span>
+
+
+                        </button>
+
+
+                    </form>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     COLUNA LATERAL
+                ================================================== -->
+
+                <aside class="analysis-sidebar">
+
+
+                    <!-- ALERTA -->
+
+                    <div class="sidebar-card attention-card">
+
+
+                        <div class="sidebar-icon orange-sidebar">
+                            ⚠️
+                        </div>
+
+
+                        <span class="sidebar-label">
+                            Enquanto verifica
+                        </span>
+
+
+                        <h3>
+                            Não tenha pressa.
+                        </h3>
+
+
+                        <p>
+                            Golpistas costumam criar situações de urgência
+                            para tentar fazer você agir sem pensar.
+                        </p>
+
+
+
+                        <ul class="simple-check-list danger-list">
+
+                            <li>
+                                <span>×</span>
+                                Não clique em links
+                            </li>
+
+                            <li>
+                                <span>×</span>
+                                Não informe senhas
+                            </li>
+
+                            <li>
+                                <span>×</span>
+                                Não informe códigos recebidos por SMS
+                            </li>
+
+                            <li>
+                                <span>×</span>
+                                Não faça PIX por pressão
+                            </li>
+
+                        </ul>
+
+
+                    </div>
+
+
+
+                    <!-- AJUDA -->
+
+                    <div class="sidebar-card help-card">
+
+
+                        <div class="sidebar-icon blue-sidebar">
+                            ?
+                        </div>
+
+
+                        <span class="sidebar-label blue-label">
+                            Precisa de ajuda?
+                        </span>
+
+
+                        <h3>
+                            Como copiar uma mensagem?
+                        </h3>
+
+
+
+                        <div class="copy-steps">
+
+
+                            <div>
+
+                                <span>1</span>
+
+                                <p>
+                                    Pressione a mensagem por alguns segundos.
+                                </p>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>2</span>
+
+                                <p>
+                                    Toque na opção
+                                    <strong>Copiar</strong>.
+                                </p>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>3</span>
+
+                                <p>
+                                    Volte ao ScamCoup, pressione o campo
+                                    acima e toque em
+                                    <strong>Colar</strong>.
+                                </p>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </aside>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             INFORMAÇÕES EDUCATIVAS
+        ====================================================== -->
+
+        <section class="analysis-info-section">
+
+            <div class="container">
+
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        O que observamos
+                    </span>
+
+
+                    <h2>
+                        Alguns sinais que podem indicar um golpe
+                    </h2>
+
+
+                    <p>
+                        Você não precisa identificar esses sinais sozinho.
+                        O ScamCoup procura por eles durante a verificação.
+                    </p>
+
+                </div>
+
+
+
+                <div class="risk-signs-grid">
+
+
+                    <!-- URGÊNCIA -->
+
+                    <div class="risk-sign-card">
+
+                        <div class="risk-sign-icon">
+                            ⏱️
+                        </div>
+
+                        <h3>
+                            Pressa ou urgência
+                        </h3>
+
+                        <p>
+                            Mensagens que exigem uma ação imediata podem
+                            tentar impedir que você pense com calma.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- PAGAMENTO -->
+
+                    <div class="risk-sign-card">
+
+                        <div class="risk-sign-icon">
+                            💳
+                        </div>
+
+                        <h3>
+                            Pedido de pagamento
+                        </h3>
+
+                        <p>
+                            Cobranças inesperadas, PIX ou taxas precisam
+                            ser confirmadas antes do pagamento.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- LINKS -->
+
+                    <div class="risk-sign-card">
+
+                        <div class="risk-sign-icon">
+                            🔗
+                        </div>
+
+                        <h3>
+                            Links na mensagem
+                        </h3>
+
+                        <p>
+                            Links desconhecidos podem levar a páginas falsas
+                            criadas para roubar informações.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- DADOS -->
+
+                    <div class="risk-sign-card">
+
+                        <div class="risk-sign-icon">
+                            🔐
+                        </div>
+
+                        <h3>
+                            Pedido de dados
+                        </h3>
+
+                        <p>
+                            Senhas, códigos e informações pessoais devem
+                            ser protegidos e nunca enviados sem confirmação.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         RODAPÉ
+    ====================================================== -->
+
+    <footer class="modern-footer">
+
+        <div class="container footer-content">
+
+
+            <div>
+
+                <strong>
+                    🛡️ ScamCoup
+                </strong>
+
+                <p>
+                    Informação simples para decisões mais seguras.
+                </p>
+
+            </div>
+
+
+            <span>
+                Projeto acadêmico
+            </span>
+
+
+        </div>
+
+    </footer>
+
+<!-- Agora sim com as letrinhas coloridas! -->
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+  new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
+
+<script>
+  function falarTexto(texto) {
+    if ('speechSynthesis' in window) {
+      const fala = new SpeechSynthesisUtterance(texto);
+      fala.lang = 'pt-BR';
+      window.speechSynthesis.speak(fala);
+    }
+  }
+</script>
+</body>
+
+</html>

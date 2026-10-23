@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Verificar QR Code - ScamCoup</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+
+<body>
+
+    <header class="topbar">
+
+        <div class="container topbar-content">
+
+            <a href="/"
+               class="brand">
+
+                <div class="brand-icon">
+                    🛡️
+                </div>
+
+                <div>
+                    <strong>ScamCoup</strong>
+                    <span>Proteção contra golpes digitais</span>
+                </div>
+
+            </a>
+
+
+            <div class="page-actions">
+
+                <a href="/"
+                   class="secondary-nav-button">
+                    ← Voltar ao início
+                </a>
+
+                <a href="/historico"
+                   class="history-button">
+
+                    <span>🕘</span>
+                    Minhas verificações
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <main>
+
+        <!-- HERO -->
+
+        <section class="analysis-hero">
+
+            <div class="analysis-glow analysis-glow-one"></div>
+            <div class="analysis-glow analysis-glow-two"></div>
+
+
+            <div class="container analysis-hero-content">
+
+                <div class="analysis-icon">
+                    ▦
+                </div>
+
+
+                <span class="analysis-tag">
+                    Verificação de QR Code
+                </span>
+
+
+                <h1>
+                    Recebeu um QR Code
+                    <span>e ficou em dúvida?</span>
+                </h1>
+
+
+                <p>
+                    Envie uma imagem do QR Code.
+                    O ScamCoup tentará identificar o endereço
+                    antes que você precise acessá-lo.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- PRINCIPAL -->
+
+        <section class="analysis-section">
+
+            <div class="container analysis-layout">
+
+
+                <div class="analysis-main-card">
+
+                    {% if erro %}
+                    <div class="form-alert">
+
+                        <span>⚠️</span>
+
+                        <p>
+                            <strong>Não foi possível verificar a imagem.</strong>
+                            {{ erro }}
+                        </p>
+
+                    </div>
+                    {% endif %}
+
+
+
+                    <div class="form-step">
+
+                        <div class="form-step-number">
+                            1
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Primeiro passo
+                            </span>
+
+                            <h2>
+                                Envie uma imagem do QR Code
+                            </h2>
+
+                            <p>
+                                Pode ser uma foto, captura de tela
+                                ou imagem recebida por mensagem.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <form method="POST"
+                          enctype="multipart/form-data"
+                          class="modern-analysis-form">
+
+
+                        <label for="imagem"
+                               class="modern-label">
+
+                            Escolha a imagem
+
+                        </label>
+
+
+
+                        <label for="imagem"
+                               class="upload-area">
+
+                            <div class="upload-icon">
+                                📷
+                            </div>
+
+
+                            <div class="upload-copy">
+
+                                <strong>
+                                    Clique aqui para escolher uma imagem
+                                </strong>
+
+                                <span>
+                                    Foto ou captura de tela contendo o QR Code
+                                </span>
+
+                            </div>
+
+
+                            <span class="upload-button">
+                                Escolher arquivo
+                            </span>
+
+                        </label>
+
+
+                        <input
+                            type="file"
+                            id="imagem"
+                            name="arquivo"
+                            class="hidden-file-input"
+                            accept="image/*"
+                            required>
+
+
+                        <div class="textarea-footer">
+
+                            <div class="help-text">
+
+                                <span>💡</span>
+
+                                <p>
+                                    Tente enviar uma imagem nítida
+                                    e com o QR Code aparecendo por inteiro.
+                                </p>
+
+                            </div>
+
+
+                            <span class="privacy-inline">
+                                🔒 Evite escanear antes de verificar
+                            </span>
+
+                        </div>
+
+
+
+                        <button type="submit"
+                                class="modern-submit">
+
+                            <span class="submit-icon">
+                                🔍
+                            </span>
+
+
+                            <span class="submit-copy">
+
+                                <strong>
+                                    Verificar este QR Code
+                                </strong>
+
+                                <small>
+                                    Vamos tentar identificar o conteúdo do código
+                                </small>
+
+                            </span>
+
+
+                            <span class="submit-arrow">
+                                →
+                            </span>
+
+                        </button>
+
+
+                    </form>
+
+                </div>
+
+
+
+                <!-- SIDEBAR -->
+
+                <aside class="analysis-sidebar">
+
+
+                    <div class="sidebar-card attention-card">
+
+                        <div class="sidebar-icon orange-sidebar">
+                            ⚠️
+                        </div>
+
+
+                        <span class="sidebar-label">
+                            Atenção
+                        </span>
+
+
+                        <h3>
+                            Um QR Code também pode esconder um link.
+                        </h3>
+
+
+                        <p>
+                            Ao escanear um QR Code,
+                            você pode ser direcionado para um site
+                            sem saber previamente qual endereço será aberto.
+                        </p>
+
+
+                        <ul class="simple-check-list danger-list">
+
+                            <li>
+                                <span>×</span>
+                                Não faça PIX sem confirmar
+                            </li>
+
+                            <li>
+                                <span>×</span>
+                                Não informe sua senha
+                            </li>
+
+                            <li>
+                                <span>×</span>
+                                Não confie apenas no local onde encontrou o código
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+
+                    <div class="sidebar-card help-card">
+
+                        <div class="sidebar-icon blue-sidebar">
+                            ?
+                        </div>
+
+
+                        <span class="sidebar-label blue-label">
+                            Precisa de ajuda?
+                        </span>
+
+
+                        <h3>
+                            Como enviar o QR Code?
+                        </h3>
+
+
+                        <div class="copy-steps">
+
+                            <div>
+
+                                <span>1</span>
+
+                                <p>
+                                    Tire uma foto ou faça uma captura
+                                    de tela do QR Code.
+                                </p>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>2</span>
+
+                                <p>
+                                    Toque em
+                                    <strong>Escolher arquivo</strong>.
+                                </p>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>3</span>
+
+                                <p>
+                                    Selecione a imagem no seu celular
+                                    ou computador.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </aside>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- EDUCATIVO -->
+
+        <section class="analysis-info-section">
+
+            <div class="container">
+
+
+                <div class="section-heading">
+
+                    <span class="section-tag">
+                        Antes de escanear
+                    </span>
+
+
+                    <h2>
+                        Nem todo QR Code deve ser aberto imediatamente
+                    </h2>
+
+
+                    <p>
+                        QR Codes podem facilitar pagamentos e acessos,
+                        mas também podem direcionar para páginas desconhecidas.
+                    </p>
+
+                </div>
+
+
+
+                <div class="risk-signs-grid">
+
+
+                    <div class="risk-sign-card">
+
+                        <div class="risk-sign-icon">
+                            ▦
+                        </div>
+
+                        <h3>
+                            Código desconhecido
+                        </h3>
+
+                        <p>
+                            Tenha atenção com códigos recebidos
+                            de pessoas ou locais desconhecidos.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="risk-sign-card">
+
+                        <div class="risk-sign-icon">
+                            🔗
+                        </div>
+
+                        <h3>
+                            Endereço escondido
+                        </h3>
+
+                        <p>
+                            O QR Code pode direcionar para um endereço
+                            que você não consegue visualizar antes.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="risk-sign-card">
+
+                        <div class="risk-sign-icon">
+                            💳
+                        </div>
+
+                        <h3>
+                            Pagamentos
+                        </h3>
+
+                        <p>
+                            Antes de pagar,
+                            confira sempre o nome de quem receberá o dinheiro.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="risk-sign-card">
+
+                        <div class="risk-sign-icon">
+                            ✅
+                        </div>
+
+                        <h3>
+                            Confirme a origem
+                        </h3>
+
+                        <p>
+                            Quando possível,
+                            confirme o código diretamente com a empresa
+                            ou pessoa responsável.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+
+    <footer class="modern-footer">
+
+        <div class="container footer-content">
+
+            <div>
+
+                <strong>
+                    🛡️ ScamCoup
+                </strong>
+
+                <p>
+                    Informação simples para decisões mais seguras.
+                </p>
+
+            </div>
+
+
+            <span>
+                Projeto acadêmico
+            </span>
+
+        </div>
+
+    </footer>
+<!-- ... resto do seu código da página ... -->
+
+    <!-- Widget do VLibras (Acessibilidade Auditiva) -->
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+
+    <!-- Leitor de Voz Nativo (Acessibilidade Visual) -->
+    <script>
+      function falarTexto(texto) {
+        if ('speechSynthesis' in window) {
+          const fala = new SpeechSynthesisUtterance(texto);
+          fala.lang = 'pt-BR';
+          window.speechSynthesis.speak(fala);
+        }
+      }
+    </script>
+
+  </body>
+</html>
+</body>
+
+</html>

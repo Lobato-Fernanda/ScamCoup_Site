@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Histórico - ScamCoup</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">
+        🛡️ ScamCoup
+    </div>
+
+    <div>
+        <a href="/">Início</a>
+        <a href="/analisar">Analisar</a>
+        <a href="/historico">Histórico</a>
+    </div>
+
+</nav>
+
+
+<main>
+
+    <h1>
+        Histórico de análises
+    </h1>
+
+
+    <div class="historico">
+
+        {% for analise in analises %}
+
+            <div class="card-historico">
+
+                <div class="historico-topo">
+
+                    <strong>
+                        Risco {{ analise.nivel }}
+                    </strong>
+
+                    <span>
+                        {{ analise.score }}/100
+                    </span>
+
+                </div>
+
+
+                <p>
+                    {{ analise.mensagem }}
+                </p>
+
+
+                <small>
+                    {{ analise.data }}
+                </small>
+
+            </div>
+
+        {% else %}
+
+            <p>
+                Nenhuma análise realizada.
+            </p>
+
+        {% endfor %}
+
+    </div>
+
+</main>
+
+</body>
+
+</html>
