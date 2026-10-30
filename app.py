@@ -4,6 +4,7 @@ from datetime import datetime
 from urllib.parse import urlparse
 import re
 import os
+import unicodedata
 import cv2
 app = Flask(__name__)
 UPLOAD_FOLDER = "uploads"
@@ -51,15 +52,23 @@ def criar_banco():
     conexao.close()
 
 
+def normalizar_texto(texto):
+    return " ".join(
+        "".join(c for c in unicodedata.normalize("NFKD", texto.lower())
+                if not unicodedata.combining(c)).split()
+    )
+
+
 def analisar_mensagem(mensagem):
-    texto = mensagem.lower()
+    texto = normalizar_texto(mensagem)
 
     score = 0
     motivos = []
 
     regras = [
         (
-            ["urgente", "urgência", "imediatamente", "agora", "última chance"],
+            ["urgente", "urgência", "imediatamente", "agora", "última chance",
+             "prazo vigente", "validade de 20 minutos", "link de fatura tem validade"],
             20,
             "A mensagem utiliza linguagem de urgência."
         ),
@@ -71,7 +80,8 @@ def analisar_mensagem(mensagem):
         ),
 
         (
-            ["pix", "pagamento", "pagar", "taxa", "boleto"],
+            ["pix", "pagamento", "pagar", "taxa", "boleto", "fatura",
+             "encargos", "constam encargos em sua documentação"],
             25,
             "A mensagem envolve solicitação de pagamento."
         ),
@@ -89,13 +99,13 @@ def analisar_mensagem(mensagem):
         ),
 
         (
-            ["bloqueado", "suspenso", "cancelado", "expirado"],
+            ["bloqueado", "suspenso", "cancelado", "expirado", "suspensão", "suspensao"],
             20,
             "A mensagem utiliza ameaça de bloqueio ou cancelamento."
         ),
 
         (
-            ["banco", "receita federal", "correios", "gov.br", "receita"],
+            ["banco", "receita federal", "correios", "gov.br", "receita", "detran"],
             10,
             "A mensagem menciona uma instituição conhecida."
         )
@@ -104,7 +114,7 @@ def analisar_mensagem(mensagem):
     for palavras, pontos, motivo in regras:
 
         for palavra in palavras:
-            if palavra in texto:
+            if normalizar_texto(palavra) in texto:
 
                 score += pontos
                 motivos.append(motivo)
@@ -501,12 +511,12 @@ def qrcode():
 
 def identificar_golpe(texto):
 
-    texto = texto.lower()
+    texto = normalizar_texto(texto)
 
     categorias = []
 
     if any(
-        palavra in texto
+        normalizar_texto(palavra) in texto
         for palavra in [
             "senha",
             "login",
@@ -520,7 +530,7 @@ def identificar_golpe(texto):
         )
 
     if any(
-        palavra in texto
+        normalizar_texto(palavra) in texto
         for palavra in [
             "pix",
             "transferência",
@@ -533,7 +543,7 @@ def identificar_golpe(texto):
         )
 
     if any(
-        palavra in texto
+        normalizar_texto(palavra) in texto
         for palavra in [
             "encomenda",
             "entrega",
@@ -547,7 +557,7 @@ def identificar_golpe(texto):
         )
 
     if any(
-        palavra in texto
+        normalizar_texto(palavra) in texto
         for palavra in [
             "prêmio",
             "ganhou",
@@ -561,7 +571,7 @@ def identificar_golpe(texto):
         )
 
     if any(
-        palavra in texto
+        normalizar_texto(palavra) in texto
         for palavra in [
             "banco",
             "conta bancária",
@@ -572,6 +582,12 @@ def identificar_golpe(texto):
         categorias.append(
             "Possível falsificação bancária"
         )
+
+    if "detran" in texto and any(
+        palavra in texto
+        for palavra in ["fatura", "encargos", "suspensao", "prazo vigente"]
+    ):
+        categorias.append("Possível golpe de falsa cobrança / DETRAN")
 
     if not categorias:
 
