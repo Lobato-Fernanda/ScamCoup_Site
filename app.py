@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory, abort
 import sqlite3
 from datetime import datetime
 from urllib.parse import urlparse
@@ -6,7 +6,16 @@ import re
 import os
 import unicodedata
 import cv2
-app = Flask(__name__)
+# Os HTML e o CSS deste repositório ficam na raiz.
+app = Flask(__name__, template_folder=".", static_folder=None)
+
+
+@app.route("/static/<path:filename>", endpoint="static")
+def arquivos_estaticos(filename):
+    if filename != "css/style.css":
+        abort(404)
+    return send_from_directory(app.root_path, "style.css")
+
 UPLOAD_FOLDER = "uploads"
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
